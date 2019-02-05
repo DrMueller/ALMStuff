@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  ct-backend:
+    image: __ImageName__
+    environment:
+      - ASPNETCORE_ENVIRONMENT=local
+    ports:
+      - 80:80
+    deploy:
+      replicas: 2
