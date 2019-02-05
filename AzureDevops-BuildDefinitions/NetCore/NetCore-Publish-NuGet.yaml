@@ -2,6 +2,8 @@ name: 1.0$(rev:.r) # build numbering format
 
 resources:
 - repo: self
+
+
 phases:
 - phase: Phase_1
   displayName: Agent job 1
@@ -65,8 +67,6 @@ phases:
   dependsOn: Phase_1
   condition: succeeded()
   server: true
-  variables:
-    ParentWorkItemId: 'TODO'
   steps:
   - task: AzureFunction@1
     displayName: 'Create Release Work Item'
