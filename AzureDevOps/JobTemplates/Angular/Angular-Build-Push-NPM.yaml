@@ -1,6 +1,5 @@
 parameters:
   LibraryName: ''
-  BuildNumber: ''
   ExecuteIntegrationTests: ''
 
 steps:
@@ -72,7 +71,7 @@ steps:
 
     verbose: false
 
-    customCommand: 'version {{BuildNumber}}'
+    customCommand: 'version $(Build.BuildNumber)'
 
 
 - task: Npm@1
