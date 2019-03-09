@@ -30,7 +30,7 @@ jobs:
 
       customCommand: 'run ci-unit-test-lib'
 
-  - ${{ if eq(parameters.executeIntegrationTests, 'true') }}:
+  - ${{ if eq(parameters.executeIntegrationTests, true) }}:
     - task: Npm@1
       displayName: 'Run Integration Tests'
       inputs:
