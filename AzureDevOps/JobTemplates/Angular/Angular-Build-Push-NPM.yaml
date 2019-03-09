@@ -1,89 +1,93 @@
 parameters:
   LibraryName: ''
   ExecuteIntegrationTests: ''
+pool:
+  vmImage: Hosted VS2017
 
-steps:
-- task: Npm@1
-  displayName: 'NPM CI'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: ci
+jobs:
+- job: Build
+  steps:
+  - task: Npm@1
+    displayName: 'NPM CI'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: ci
 
-- task: Npm@1
-  displayName: 'Lint'
-  inputs:
-    command: custom
+  - task: Npm@1
+    displayName: 'Lint'
+    inputs:
+      command: custom
 
-    verbose: false
+      verbose: false
 
-    customCommand: 'run ci-lint-lib'
-
-
-- task: Npm@1
-  displayName: 'Run Unit Tests'
-  inputs:
-    command: custom
-
-    verbose: false
-
-    customCommand: 'run ci-unit-test-lib'
+      customCommand: 'run ci-lint-lib'
 
 
-- task: Npm@1
-  displayName: 'Run Integration Tests'
-  inputs:
-    command: custom
+  - task: Npm@1
+    displayName: 'Run Unit Tests'
+    inputs:
+      command: custom
 
-    verbose: false
+      verbose: false
 
-    customCommand: 'run ci-integration-test-lib'
-
-  condition: and(succeeded(), eq({{ExecuteIntegrationTests}}, true))
-
-  
-- task: PublishTestResults@2
-  displayName: 'Publish Test Results'
-  inputs:
-    testResultsFiles: '**/testresults/*-tests.xml'
-
-    failTaskOnFailedTests: true
-
-  condition: succeededOrFailed()
+      customCommand: 'run ci-unit-test-lib'
 
 
-- task: Npm@1
-  displayName: 'Build for Production'
-  inputs:
-    command: custom
+  - task: Npm@1
+    displayName: 'Run Integration Tests'
+    inputs:
+      command: custom
 
-    verbose: false
+      verbose: false
 
-    customCommand: 'run ci-build-lib-prod'
+      customCommand: 'run ci-integration-test-lib'
+
+    condition: and(succeeded(), eq({{ExecuteIntegrationTests}}, true))
+
+    
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results'
+    inputs:
+      testResultsFiles: '**/testresults/*-tests.xml'
+
+      failTaskOnFailedTests: true
+
+    condition: succeededOrFailed()
 
 
-- task: Npm@1
-  displayName: 'Update Version'
-  inputs:
-    command: custom
+  - task: Npm@1
+    displayName: 'Build for Production'
+    inputs:
+      command: custom
 
-    workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
+      verbose: false
 
-    verbose: false
-
-    customCommand: 'version $(Build.BuildNumber)'
+      customCommand: 'run ci-build-lib-prod'
 
 
-- task: Npm@1
-  displayName: 'Publish'
-  inputs:
-    command: custom
+  - task: Npm@1
+    displayName: 'Update Version'
+    inputs:
+      command: custom
 
-    workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
+      workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
 
-    verbose: false
+      verbose: false
 
-    customCommand: 'publish --access public'
+      customCommand: 'version $(Build.BuildNumber)'
 
-    customEndpoint: 'NPM-DrMueller'
+
+  - task: Npm@1
+    displayName: 'Publish'
+    inputs:
+      command: custom
+
+      workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
+
+      verbose: false
+
+      customCommand: 'publish --access public'
+
+      customEndpoint: 'NPM-DrMueller'
 
