@@ -1,0 +1,17 @@
+parameters:
+  libraryName: ''
+  executeIntegrationTests: ''
+
+jobs:
+- job: NPM-CI
+  steps:
+  - template: AzureDevOps/Templates/StepTemplates/Angular/Initialize_And_Test.yaml@ALMStuff
+    parameters:
+      executeIntegrationTests: {{ parameters.executeIntegrationTests }}
+  - template: AzureDevOps/Templates/StepTemplates/Angular/Build_Production.yaml@ALMStuff
+  - template: AzureDevOps/Templates/StepTemplates/Angular/Update_Version.yaml@ALMStuff
+    parameters:
+      executeIntegrationTests: {{ parameters.libraryName }}
+  - template: AzureDevOps/Templates/StepTemplates/Angular/Publish_NPM.yaml@ALMStuff
+    parameters:
+      executeIntegrationTests: {{ parameters.libraryName }}
