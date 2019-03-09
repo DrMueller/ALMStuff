@@ -2,6 +2,14 @@ parameters:
   libraryName: ''
   executeIntegrationTests: ''
 
+resources:
+  repositories:
+  - repository: ALMStuff
+    type: github
+    name: DrMueller/ALMStuff
+    ref: refs/heads/master
+    endpoint: GitHub-DrMueller
+
 jobs:
 - job: NPM-CI
   steps:
