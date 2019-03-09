@@ -1,5 +1,4 @@
 parameters:
-  libraryName: ''
   executeIntegrationTests: ''
 
 steps:
@@ -17,7 +16,7 @@ steps:
 
     verbose: false
 
-    customCommand: 'run ci-lint-lib'
+    customCommand: 'run ci-lint'
 
 - task: Npm@1
   displayName: 'Run Unit Tests'
@@ -26,7 +25,7 @@ steps:
 
     verbose: false
 
-    customCommand: 'run ci-unit-test-lib'
+    customCommand: 'run ci-unit-test'
 
 - ${{ if eq(parameters.executeIntegrationTests, true) }}:
   - task: Npm@1
@@ -36,7 +35,7 @@ steps:
 
       verbose: false
 
-      customCommand: 'run ci-integration-test-lib'
+      customCommand: 'run ci-integration-test'
 
     condition: succeeded()
 
@@ -49,13 +48,4 @@ steps:
     failTaskOnFailedTests: true
 
   condition: succeededOrFailed()
-
-
-- task: Npm@1
-  displayName: 'Build for Production'
-  inputs:
-    command: custom
-
-    verbose: false
-
-    customCommand: 'run ci-build-lib-prod'
+  
