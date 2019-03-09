@@ -8,10 +8,11 @@ queue:
 
 steps:
 - task: Npm@1
-  displayName: 'NPM install'
+  displayName: 'NPM CI'
   inputs:
+    command: custom
     verbose: false
-
+    customCommand: ci
 
 - task: Npm@1
   displayName: 'NPM NG Lint'

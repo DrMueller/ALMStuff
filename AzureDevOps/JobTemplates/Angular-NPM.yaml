@@ -1,0 +1,90 @@
+parameters:
+  LibraryName: ''
+  BuildNumber: ''
+  ExecuteIntegrationTests: ''
+
+steps:
+- task: Npm@1
+  displayName: 'NPM CI'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: ci
+
+- task: Npm@1
+  displayName: 'Lint'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run ci-lint-lib'
+
+
+- task: Npm@1
+  displayName: 'Run Unit Tests'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run ci-unit-test-lib'
+
+
+- task: Npm@1
+  displayName: 'Run Integration Tests'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run ci-integration-test-lib'
+
+  condition: and(succeeded(), eq({{ExecuteIntegrationTests}}, true))
+
+  
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testResultsFiles: '**/testresults/*-tests.xml'
+
+    failTaskOnFailedTests: true
+
+  condition: succeededOrFailed()
+
+
+- task: Npm@1
+  displayName: 'Build for Production'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run ci-build-lib-prod'
+
+
+- task: Npm@1
+  displayName: 'Update Version'
+  inputs:
+    command: custom
+
+    workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
+
+    verbose: false
+
+    customCommand: 'version {{BuildNumber}}'
+
+
+- task: Npm@1
+  displayName: 'Publish'
+  inputs:
+    command: custom
+
+    workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
+
+    verbose: false
+
+    customCommand: 'publish --access public'
+
+    customEndpoint: 'NPM-DrMueller'
+

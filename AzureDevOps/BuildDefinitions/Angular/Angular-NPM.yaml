@@ -10,10 +10,11 @@ variables:
   LibraryName: 'testing'
 steps:
 - task: Npm@1
-  displayName: 'Install NPM Packages'
+  displayName: 'NPM CI'
   inputs:
+    command: custom
     verbose: false
-
+    customCommand: ci
 
 - task: Npm@1
   displayName: 'Lint'
