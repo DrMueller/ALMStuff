@@ -1,6 +1,6 @@
 parameters:
-  LibraryName: ''
-  ExecuteIntegrationTests: ''
+  libraryName: ''
+  executeIntegrationTests: ''
 
 jobs:
 - job: Build
@@ -30,17 +30,17 @@ jobs:
 
       customCommand: 'run ci-unit-test-lib'
 
+  - ${{ if eq(parameters.executeIntegrationTests, 'true') }}:
+    - task: Npm@1
+      displayName: 'Run Integration Tests'
+      inputs:
+        command: custom
 
-  - task: Npm@1
-    displayName: 'Run Integration Tests'
-    inputs:
-      command: custom
+        verbose: false
 
-      verbose: false
+        customCommand: 'run ci-integration-test-lib'
 
-      customCommand: 'run ci-integration-test-lib'
-
-    condition: and(succeeded(), eq({{ parameters.ExecuteIntegrationTests }}, 'true'))
+      condition: succeeded()
 
     
   - task: PublishTestResults@2
@@ -68,7 +68,7 @@ jobs:
     inputs:
       command: custom
 
-      workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
+      workingDir: 'dist/drmueller/${{parameters.libraryName}}'
 
       verbose: false
 
@@ -80,7 +80,7 @@ jobs:
     inputs:
       command: custom
 
-      workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
+      workingDir: 'dist/drmueller/${{parameters.libraryName}}'
 
       verbose: false
 
