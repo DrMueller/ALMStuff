@@ -5,3 +5,4 @@ parameters:
 jobs:
 - job: NPM-CI
   steps:
+  - template: AzureDevOps/Templates/StepTemplates/Angular/Initialize_And_Test.yaml@ALMStuff
