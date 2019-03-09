@@ -3,12 +3,10 @@ parameters:
 
 steps:
 - task: Npm@1
-  displayName: 'Update Version'
+  displayName: 'Publish'
   inputs:
     command: custom
-
-    workingDir: 'dist/drmueller/${{parameters.libraryName}}'
-
+    workingDir: 'dist/drmueller/$(LibraryName)'
     verbose: false
-
-    customCommand: 'version $(Build.BuildNumber)'
+    customCommand: 'publish --access public'
+    customEndpoint: 'NPM-DrMueller'
