@@ -40,7 +40,7 @@ jobs:
 
       customCommand: 'run ci-integration-test-lib'
 
-    condition: and(succeeded(), eq({{parameters.ExecuteIntegrationTests}}, 'true'))
+    condition: and(succeeded(), eq({{ parameters.ExecuteIntegrationTests }}, 'true'))
 
     
   - task: PublishTestResults@2
