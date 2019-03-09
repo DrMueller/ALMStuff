@@ -1,0 +1,14 @@
+parameters:
+  libraryName: ''
+
+steps:
+- task: Npm@1
+  displayName: 'Update Version'
+  inputs:
+    command: custom
+
+    workingDir: 'dist/drmueller/${{parameters.libraryName}}'
+
+    verbose: false
+
+    customCommand: 'version $(Build.BuildNumber)'
