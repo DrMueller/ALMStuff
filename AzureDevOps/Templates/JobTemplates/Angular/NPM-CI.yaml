@@ -2,6 +2,9 @@ parameters:
   libraryName: ''
   executeIntegrationTests: ''
 
+
+
+jobs:
 resources:
   repositories:
   - repository: ALMStuff
@@ -9,8 +12,6 @@ resources:
     name: DrMueller/ALMStuff
     ref: refs/heads/master
     endpoint: GitHub-DrMueller
-
-jobs:
 - job: NPM-CI
   steps:
   - template: AzureDevOps/Templates/StepTemplates/Angular/Initialize_And_Test.yaml@ALMStuff
