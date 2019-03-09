@@ -21,7 +21,6 @@ jobs:
 
       customCommand: 'run ci-lint-lib'
 
-
   - task: Npm@1
     displayName: 'Run Unit Tests'
     inputs:
@@ -41,7 +40,7 @@ jobs:
 
       customCommand: 'run ci-integration-test-lib'
 
-    condition: and(succeeded(), eq({{ExecuteIntegrationTests}}, 'true'))
+    condition: and(succeeded(), eq({{parameters.ExecuteIntegrationTests}}, 'true'))
 
     
   - task: PublishTestResults@2
