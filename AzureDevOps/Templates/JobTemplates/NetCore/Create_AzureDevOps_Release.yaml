@@ -25,5 +25,5 @@ jobs:
        {
            "buildId": $(Build.BuildId),
            "buildVersion": "$(Build.BuildNumber)",
-           "parentWorkItemId": ${{ ParentWorkItemId }}
+           "parentWorkItemId": ${{ parameters.ParentWorkItemId }}
        }
