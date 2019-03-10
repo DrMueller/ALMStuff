@@ -2,14 +2,19 @@ parameters:
   LibraryName: ''
   ExecuteIntegrationTests: false 
 
-steps:
-- template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
-  parameters:
-    ExecuteIntegrationTests: ${{ parameters-ExecuteIntegrationTests }}
-- template: ../../StepTemplates/Angular/Build_Production.yaml
-- template: ../../StepTemplates/Angular/Update_Version.yaml
-  parameters:
-    LibraryName: {{ parameters.LibraryName }}
-- template: ../../StepTemplates/Angular/Publish_NPM.yaml
-  parameters:
-    LibraryName: ${{ parameters.LibraryName }}
+jobs:
+- job: 'BuildAndPublishToNPm'
+  displayName: 'Build and publish to NPM'
+  pool:
+    name: 'Hosted VS2017'
+  steps:
+  - template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
+    parameters:
+      ExecuteIntegrationTests: ${{ parameters-ExecuteIntegrationTests }}
+  - template: ../../StepTemplates/Angular/Build_Production.yaml
+  - template: ../../StepTemplates/Angular/Update_Version.yaml
+    parameters:
+      LibraryName: {{ parameters.LibraryName }}
+  - template: ../../StepTemplates/Angular/Publish_NPM.yaml
+    parameters:
+      LibraryName: ${{ parameters.LibraryName }}
