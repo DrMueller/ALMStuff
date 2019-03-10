@@ -3,10 +3,10 @@ parameters:
 
 jobs:
 - job: CreateAzureDevOpsRelease
+  pool: server
   displayName: 'Create Azure DevOps Release'
   dependsOn: {{ dependsOnJobName }}
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  server: true
   steps:
   - task: AzureFunction@1
     displayName: 'Create Release'
@@ -35,7 +35,3 @@ jobs:
                }
            ]
        }
-
-    enabled: false
-
-
