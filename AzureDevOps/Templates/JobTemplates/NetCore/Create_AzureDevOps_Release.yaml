@@ -14,7 +14,7 @@ jobs:
     inputs:
       function: 'https://tfsreleasemanagementsystem.azurewebsites.net/api/CreateRelease'
 
-      key: 'KCw8zHoDdJ2lGj2VzaHCaywIVZTGyT8MldAkAlcdFb63V9ephxuA1A=='
+      key: $(TfsReleaseManagementKey)
 
       headers: |  
        {
