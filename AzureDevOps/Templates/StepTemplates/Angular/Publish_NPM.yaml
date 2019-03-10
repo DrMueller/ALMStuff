@@ -3,7 +3,7 @@ parameters:
 
 steps:
 - task: Npm@1
-  displayName: 'Publish'
+  displayName: 'Publish to NPM'
   inputs:
     command: custom
     workingDir: 'dist/drmueller/$(LibraryName)'

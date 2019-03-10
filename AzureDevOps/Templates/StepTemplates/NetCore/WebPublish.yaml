@@ -1,0 +1,19 @@
+parameters:
+  buildConfiguration: ''
+  folderToPublish: ''
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: publish
+
+    publishWebProjects: false
+
+    projects: '**/${{ folderToPublish }}/*.csproj'
+
+    arguments: '--configuration ${{ buildConfiguration }} --output $(Build.ArtifactStagingDirectory)  /p:DeleteExistingFiles=True'
+
+    zipAfterPublish: false
+
+    modifyOutputPath: false
