@@ -1,8 +1,7 @@
 parameters:
-  libraryName: ''
-  executeIntegrationTests: ''
 
 jobs:
-- job: NPM-CI
+- job: CreateAzureDevOpsRelease
+  displayName: 'Create Azure DevOps Release'
   steps:
   - template: AzureDevOps/Templates/StepTemplates/Angular/Initialize_And_Test.yaml@ALMStuff
