@@ -14,7 +14,7 @@ jobs:
   - template: ../../StepTemplates/Angular/Build_Production.yaml
   - template: ../../StepTemplates/Angular/Update_Version.yaml
     parameters:
-      LibraryName: {{ parameters.LibraryName }}
+      LibraryName: ${{ parameters.LibraryName }}
   - template: ../../StepTemplates/Angular/Publish_NPM.yaml
     parameters:
       LibraryName: ${{ parameters.LibraryName }}
