@@ -7,7 +7,7 @@ steps:
   inputs:
     command: pack
 
-    packagesToPack: '**/${{folderToPack}}/*.csproj'
+    packagesToPack: '**/${{parameters.folderToPack}}/*.csproj'
 
     versioningScheme: byBuildNumber
 
