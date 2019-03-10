@@ -1,7 +1,43 @@
 parameters:
+  dependsOnJobName: ''
 
 jobs:
 - job: CreateAzureDevOpsRelease
   displayName: 'Create Azure DevOps Release'
   steps:
-  - template: AzureDevOps/Templates/StepTemplates/Angular/Initialize_And_Test.yaml@ALMStuff
+  dependsOn: {{ dependsOnJobName }}
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  server: true
+  steps:
+  - task: AzureFunction@1
+    displayName: 'Create Release'
+    inputs:
+      function: 'https://drmuellerstfsproxy.azurewebsites.net/api/PostWorkItem'
+
+      key: '$(TfsReleaseManagementKey)'
+
+      body: |  
+       {
+           "workItemTypeName": "Release",
+           "fields": [
+               {
+                  "name": "custom.version",
+                  "value": "$(Build.BuildNumber)"
+               },
+               {
+                  "name": "Title",
+                  "value": "Build $(Build.BuildNumber)"
+               }
+           ],
+           "relations": [
+               {
+                   "RelationTypeDescription": "System.LinkTypes.Hierarchy-Reverse",
+                   "TargetWorkItemId": $(ParentWorkItemId)
+               }
+           ]
+       
+       }
+
+    enabled: false
+
+
