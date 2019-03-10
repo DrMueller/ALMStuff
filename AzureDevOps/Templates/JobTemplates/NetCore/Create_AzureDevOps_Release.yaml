@@ -1,6 +1,6 @@
 parameters:
   DependsOnJobName: ''
-  ParentWorkItemId: ''
+  ParentWorkItemId: 222
 
 jobs:
 - job: CreateAzureDevOpsRelease
@@ -25,5 +25,5 @@ jobs:
        {
            "buildId": $(Build.BuildId),
            "buildVersion": "$(Build.BuildNumber)",
-           "parentWorkItemId": "${{ParentWorkItemId}}"
+           "parentWorkItemId": ${{ParentWorkItemId}}
        }
