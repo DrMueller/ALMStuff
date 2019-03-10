@@ -10,7 +10,7 @@ jobs:
   steps:
   - template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
     parameters:
-      ExecuteIntegrationTests: ${{ parameters-ExecuteIntegrationTests }}
+      ExecuteIntegrationTests: ${{ parameters.ExecuteIntegrationTests }}
   - template: ../../StepTemplates/Angular/Build_Production.yaml
   - template: ../../StepTemplates/Angular/Update_Version.yaml
     parameters:
