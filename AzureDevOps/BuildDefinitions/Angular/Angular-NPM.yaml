@@ -1,8 +1,4 @@
-name: 2.2$(rev:.r) # build numbering format
-
-queue:
-  name: Hosted VS2017
-  demands: npm
+name: 1.0$(rev:.r) # build numbering format
 
 resources:
   repositories:
@@ -16,14 +12,8 @@ variables:
   LibraryName: 'TODO'
   ExecuteIntegrationTests: TODO 
 
-steps:
-- template: AzureDevOps/Templates/StepTemplates/Angular/Initialize_And_Test.yaml@ALMStuff
-  parameters:
-    ExecuteIntegrationTests: $(ExecuteIntegrationTests)
-- template: AzureDevOps/Templates/StepTemplates/Angular/Build_Production.yaml@ALMStuff
-- template: AzureDevOps/Templates/StepTemplates/Angular/Update_Version.yaml@ALMStuff
+jobs:
+- template: AzureDevOps/Templates/JobTemplates/Angular/Build_And_Publish_To_NPM.yaml@ALMStuff
   parameters:
     LibraryName: $(LibraryName)
-- template: AzureDevOps/Templates/StepTemplates/Angular/Publish_NPM.yaml@ALMStuff
-  parameters:
-    LibraryName: $(LibraryName)
+    ExecuteIntegrationTests: $(ExecuteIntegrationTests) 
