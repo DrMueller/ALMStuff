@@ -9,29 +9,20 @@ jobs:
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   steps:
   - task: AzureFunction@1
-    displayName: 'Create Release'
+    displayName: 'Create Release Work Item'
     inputs:
       function: 'https://tfsreleasemanagementsystem.azurewebsites.net/api/CreateRelease'
 
-      key: '$(TfsReleaseManagementKey)'
+       key: '$(TfsReleaseManagementKey)'
+
+      headers: |  
+       {
+       "Content-Type":"application/json"
+       }
 
       body: |  
        {
-           "workItemTypeName": "Release",
-           "fields": [
-               {
-                  "name": "custom.version",
-                  "value": "$(Build.BuildNumber)"
-               },
-               {
-                  "name": "Title",
-                  "value": "Build $(Build.BuildNumber)"
-               }
-           ],
-           "relations": [
-               {
-                   "RelationTypeDescription": "System.LinkTypes.Hierarchy-Reverse",
-                   "TargetWorkItemId": $(ParentWorkItemId)
-               }
-           ]
+           "buildId": $(Build.BuildId),
+           "buildVersion": "$(Build.BuildNumber)",
+           "parentWorkItemId": $(ParentWorkItemId)
        }
