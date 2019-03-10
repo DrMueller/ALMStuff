@@ -11,7 +11,7 @@ jobs:
   - task: AzureFunction@1
     displayName: 'Create Release'
     inputs:
-      function: 'https://drmuellerstfsproxy.azurewebsites.net/api/PostWorkItem'
+      function: 'https://tfsreleasemanagementsystem.azurewebsites.net/api/CreateRelease'
 
       key: '$(TfsReleaseManagementKey)'
 
