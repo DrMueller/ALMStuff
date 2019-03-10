@@ -4,7 +4,6 @@ parameters:
 jobs:
 - job: CreateAzureDevOpsRelease
   displayName: 'Create Azure DevOps Release'
-  steps:
   dependsOn: {{ dependsOnJobName }}
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   server: true
@@ -35,7 +34,6 @@ jobs:
                    "TargetWorkItemId": $(ParentWorkItemId)
                }
            ]
-       
        }
 
     enabled: false
