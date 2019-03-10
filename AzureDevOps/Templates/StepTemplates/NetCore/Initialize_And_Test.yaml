@@ -1,5 +1,5 @@
 parameters:
-  buildConfiguration: ''
+  BuildConfiguration: ''
 
 steps:
 - task: DotNetCoreCLI@2
@@ -17,7 +17,7 @@ steps:
   inputs:
     projects: '**/*.csproj'
 
-    arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.buildConfiguration }}'
+    arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.BuildConfiguration }}'
 
 
 - task: DotNetCoreCLI@2
@@ -27,4 +27,4 @@ steps:
 
     projects: '**/*Tests/*.csproj'
 
-    arguments: '--configuration ${{ parameters.buildConfiguration }}'
+    arguments: '--configuration ${{ parameters.BuildConfiguration }}'

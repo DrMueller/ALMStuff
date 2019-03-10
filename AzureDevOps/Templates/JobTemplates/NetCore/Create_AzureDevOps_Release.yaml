@@ -1,11 +1,11 @@
 parameters:
-  dependsOnJobName: ''
+  DependsOnJobName: ''
 
 jobs:
 - job: CreateAzureDevOpsRelease
   pool: server
   displayName: 'Create Azure DevOps Release'
-  dependsOn: ${{ parameters.dependsOnJobName }}
+  dependsOn: ${{ parameters.DependsOnJobName }}
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   steps:
   - task: AzureFunction@1
@@ -13,7 +13,7 @@ jobs:
     inputs:
       function: 'https://tfsreleasemanagementsystem.azurewebsites.net/api/CreateRelease'
 
-       key: '$(TfsReleaseManagementKey)'
+      key: 'KCw8zHoDdJ2lGj2VzaHCaywIVZTGyT8MldAkAlcdFb63V9ephxuA1A=='
 
       headers: |  
        {

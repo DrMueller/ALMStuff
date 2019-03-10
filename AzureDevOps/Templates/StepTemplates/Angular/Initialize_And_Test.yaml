@@ -1,5 +1,5 @@
 parameters:
-  executeIntegrationTests: ''
+  ExecuteIntegrationTests: ''
 
 steps:
 - task: Npm@1
@@ -27,7 +27,7 @@ steps:
 
     customCommand: 'run ci-unit-test'
 
-- ${{ if eq(parameters.executeIntegrationTests, true) }}:
+- ${{ if eq(parameters.ExecuteIntegrationTests, true) }}:
   - task: Npm@1
     displayName: 'Run Integration Tests'
     inputs:
