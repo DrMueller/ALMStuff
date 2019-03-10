@@ -1,6 +1,6 @@
 parameters:
   DependsOnJobName: ''
-  ParentWorkItemId: 222
+  ParentWorkItemId: ''
 
 jobs:
 - job: CreateAzureDevOpsRelease
