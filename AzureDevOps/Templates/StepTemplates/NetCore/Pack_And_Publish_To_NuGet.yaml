@@ -1,5 +1,5 @@
 parameters:
-  buildConfiguration: ''
+    folderToPack: ''
 
 steps:
 - task: DotNetCoreCLI@2
@@ -7,7 +7,7 @@ steps:
   inputs:
     command: pack
 
-    packagesToPack: '**/Application/*.csproj'
+    packagesToPack: '**/${{folderToPack}}/*.csproj'
 
     versioningScheme: byBuildNumber
 
