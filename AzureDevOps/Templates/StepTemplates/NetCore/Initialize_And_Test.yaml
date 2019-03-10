@@ -17,7 +17,7 @@ steps:
   inputs:
     projects: '**/*.csproj'
 
-    arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ buildConfiguration }}'
+    arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.buildConfiguration }}'
 
 
 - task: DotNetCoreCLI@2
@@ -27,4 +27,4 @@ steps:
 
     projects: '**/*Tests/*.csproj'
 
-    arguments: '--configuration ${{ buildConfiguration }}'
+    arguments: '--configuration ${{ parameters.buildConfiguration }}'
