@@ -11,6 +11,6 @@ jobs:
   - template: ../../StepTemplates/NetCore/Initialize_And_Test.yaml
     parameters:
       BuildConfiguration: ${{ parameters.BuildConfiguration }}
-  - template: AzureDevOps/Templates/StepTemplates/NetCore/Pack_And_Publish_To_NuGet.yaml
+  - template: ../../StepTemplates/NetCore/Pack_And_Publish_To_NuGet.yaml
     parameters:
       FolderToPack: ${{ parameters.FolderToPack }}
