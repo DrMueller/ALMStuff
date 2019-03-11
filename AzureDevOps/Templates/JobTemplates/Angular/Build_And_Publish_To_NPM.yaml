@@ -3,7 +3,7 @@ parameters:
   ExecuteIntegrationTests: false 
 
 jobs:
-- job: 'BuildAndPublishToNPm'
+- job: 'BuildAndPublishToNPM'
   displayName: 'Build and publish to NPM'
   pool:
     name: 'Hosted VS2017'
@@ -15,6 +15,6 @@ jobs:
   - template: ../../StepTemplates/Angular/Update_Version.yaml
     parameters:
       LibraryName: ${{ parameters.LibraryName }}
-  - template: ../../StepTemplates/Angular/Publish_NPM.yaml
+  - template: ../../StepTemplates/Angular/Publish_To_NPM.yaml
     parameters:
       LibraryName: ${{ parameters.LibraryName }}
