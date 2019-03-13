@@ -8,33 +8,35 @@ queue:
 
 steps:
 - task: Npm@1
-  displayName: 'NPM Install'
+  displayName: 'NPM CI'
   inputs:
+    command: custom
     verbose: false
+    customCommand: ci
 
 
 - task: Npm@1
-  displayName: 'NPM Lint'
+  displayName: 'Lint'
   inputs:
     command: custom
 
     verbose: false
 
-    customCommand: 'run lint'
+    customCommand: 'run ci-lint'
 
 
 - task: Npm@1
-  displayName: 'NPM Git Clean'
+  displayName: 'Git Clean'
   inputs:
     command: custom
 
     verbose: false
 
-    customCommand: 'run git-clean'
+    customCommand: 'run ci-git-clean'
 
 
 - task: Npm@1
-  displayName: 'NPM Execute Tests'
+  displayName: 'Execute Tests'
   inputs:
     command: custom
 
@@ -44,17 +46,17 @@ steps:
 
 
 - task: Npm@1
-  displayName: 'NPM Git Config'
+  displayName: 'Git Config'
   inputs:
     command: custom
 
     verbose: false
 
-    customCommand: 'run git-config'
+    customCommand: 'run ci-git-config'
 
 
 - task: Npm@1
-  displayName: 'NPM Update version'
+  displayName: 'Update version'
   inputs:
     command: custom
 
@@ -64,7 +66,7 @@ steps:
 
 
 - task: Npm@1
-  displayName: 'NPM Publish'
+  displayName: 'Publish'
   inputs:
     command: custom
 
