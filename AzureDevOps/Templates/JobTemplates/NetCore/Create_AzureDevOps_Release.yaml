@@ -4,8 +4,7 @@ parameters:
 
 jobs:
 - job: CreateAzureDevOpsRelease
-  pool:
-    name: 'Default'
+  pool: server
   displayName: 'Create Azure DevOps Release'
   dependsOn: ${{ parameters.DependsOnJobName }}
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
