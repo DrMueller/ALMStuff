@@ -1,0 +1,10 @@
+parameters:
+  BuildConfiguration: ''
+  FolderToBuild: ''
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    projects: '**/${{ parameters.FolderToPublish }}/*.csproj'
+    arguments: '--configuration ${{ parameters.BuildConfiguration }} --output $(Build.ArtifactStagingDirectory)  /p:DeleteExistingFiles=True'
