@@ -11,7 +11,6 @@ jobs:
   steps:
   - task: AzureFunction@1
     displayName: 'Create Release Work Item'
-    enabled: false
     inputs:
       function: 'https://tfsreleasemanagementsystem.azurewebsites.net/api/CreateRelease'
 
@@ -28,3 +27,4 @@ jobs:
            "buildVersion": "$(Build.BuildNumber)",
            "parentWorkItemId": ${{ parameters.ParentWorkItemId }}
        }
+    enabled: false
