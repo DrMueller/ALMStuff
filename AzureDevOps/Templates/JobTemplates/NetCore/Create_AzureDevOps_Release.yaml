@@ -27,4 +27,3 @@ jobs:
            "buildVersion": "$(Build.BuildNumber)",
            "parentWorkItemId": ${{ parameters.ParentWorkItemId }}
        }
-    enabled: false
