@@ -1,0 +1,11 @@
+jobs:
+- job: 'BuildAndPublishAzureDevOpsExtension'
+  displayName: 'Build and publish Azure DevOps Extension'
+  pool:
+    name: 'Default'
+  steps:
+  - template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
+    parameters:
+      ExecuteIntegrationTests: false
+  - template: ../../StepTemplates/Angular/Build_Production.yaml
+  - template: ../../StepTemplates/Angular/Update_Version.yaml
