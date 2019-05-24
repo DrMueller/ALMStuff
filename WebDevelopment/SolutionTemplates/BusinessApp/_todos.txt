@@ -1,0 +1,3 @@
+- Override TSLint from 
+- Update TSConfig manually
+- Remove karma.conf.js and use the one desired
