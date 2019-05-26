@@ -8,6 +8,7 @@ jobs:
   pool:
     name: 'Default'
   steps:
+  - template: ../../StepTemplates/Angular/Configure_Git.yaml
   - template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
     parameters:
       ExecuteIntegrationTests: ${{ parameters.ExecuteIntegrationTests }}

@@ -1,0 +1,32 @@
+parameters:
+  LibraryName: ''
+
+steps:
+- task: Npm@1
+  displayName: 'Git Clean'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run git reset --hard'
+
+
+- task: Npm@1
+  displayName: 'Execute Tests'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run ci-execute-tests'
+
+
+- task: Npm@1
+  displayName: 'Git Config'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'rungit config --global user.email \"matthiasm@live.de\" && git config --global user.name \"Matthias Mueller\"'
