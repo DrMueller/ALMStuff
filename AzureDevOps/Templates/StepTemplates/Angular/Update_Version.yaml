@@ -1,5 +1,5 @@
 parameters:
-  LibraryName: ''
+  WorkingDir: ''
 
 steps:
 - task: Npm@1
@@ -7,7 +7,7 @@ steps:
   inputs:
     command: custom
 
-    workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
+    workingDir: '${{WorkingDir}}'
 
     verbose: false
 

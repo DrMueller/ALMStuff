@@ -12,9 +12,9 @@ jobs:
     parameters:
       ExecuteIntegrationTests: ${{ parameters.ExecuteIntegrationTests }}
   - template: ../../StepTemplates/Angular/Build_Production.yaml
-  - template: ../../StepTemplates/Angular/Update_Version.yaml
+  - template: ../../StepTemplates/Angular/Library_Update_Version.yaml
     parameters:
-      LibraryName: ${{ parameters.LibraryName }}
+      WorkingDir: dist/drmueller/${{parameters.LibraryName}}
   - template: ../../StepTemplates/Angular/Publish_To_NPM.yaml
     parameters:
       LibraryName: ${{ parameters.LibraryName }}
