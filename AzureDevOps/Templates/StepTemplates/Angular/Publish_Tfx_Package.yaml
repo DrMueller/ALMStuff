@@ -9,4 +9,4 @@ steps:
 
     verbose: false
 
-    customCommand: 'run ci-publish-package'
+    customCommand: 'run ci-publish-package -- --token $(PublishToken)'
