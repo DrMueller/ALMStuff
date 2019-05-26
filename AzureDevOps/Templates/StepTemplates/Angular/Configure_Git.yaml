@@ -9,18 +9,7 @@ steps:
 
     verbose: false
 
-    customCommand: 'run git reset --hard'
-
-
-- task: Npm@1
-  displayName: 'Execute Tests'
-  inputs:
-    command: custom
-
-    verbose: false
-
-    customCommand: 'run ci-execute-tests'
-
+    customCommand: 'git reset --hard'
 
 - task: Npm@1
   displayName: 'Git Config'
@@ -29,4 +18,4 @@ steps:
 
     verbose: false
 
-    customCommand: 'rungit config --global user.email \"matthiasm@live.de\" && git config --global user.name \"Matthias Mueller\"'
+    customCommand: 'git config --global user.email \"matthiasm@live.de\" && git config --global user.name \"Matthias Mueller\"'
