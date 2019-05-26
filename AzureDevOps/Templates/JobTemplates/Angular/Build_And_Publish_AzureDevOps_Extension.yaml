@@ -8,6 +8,6 @@ jobs:
     parameters:
       ExecuteIntegrationTests: false
   - template: ../../StepTemplates/Angular/Build_Production.yaml
-  - template: ../../StepTemplates/Angular/Library_Update_Version.yaml
+  - template: ../../StepTemplates/Angular/Update_Version.yaml
     parameters:
       WorkingDir: dist
