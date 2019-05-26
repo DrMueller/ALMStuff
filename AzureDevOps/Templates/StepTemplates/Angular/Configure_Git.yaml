@@ -9,7 +9,7 @@ steps:
 
     verbose: false
 
-    customCommand: 'git reset --hard'
+    customCommand: 'run ci-git-clean'
 
 - task: Npm@1
   displayName: 'Git Config'
@@ -18,4 +18,4 @@ steps:
 
     verbose: false
 
-    customCommand: 'git config --global user.email \"matthiasm@live.de\" && git config --global user.name \"Matthias Mueller\"'
+    customCommand: 'run ci-git-config'
