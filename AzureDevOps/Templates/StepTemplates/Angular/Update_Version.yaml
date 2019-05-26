@@ -7,7 +7,7 @@ steps:
   inputs:
     command: custom
 
-    workingDir: '${{WorkingDir}}'
+    workingDir: '${{parameters.WorkingDir}}'
 
     verbose: false
 
