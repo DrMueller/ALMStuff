@@ -1,0 +1,12 @@
+parameters:
+  LibraryName: ''
+
+steps:
+- task: Npm@1
+  displayName: 'Publish TFX'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run ci-publish-package'
