@@ -2,7 +2,7 @@ steps:
 - task: ArchiveFiles@2
   displayName: Archive as ZIP
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/dist'
+    rootFolderOrFile: '$(Build.Repository.LocalPath)/dist'
 
     includeRootFolder: false
 
