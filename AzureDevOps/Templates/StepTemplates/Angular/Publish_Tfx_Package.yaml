@@ -9,4 +9,4 @@ steps:
 
     verbose: false
 
-    customCommand: 'run ci-publish-package -- --auth-type pat --token $(PublishToken)'
+    customCommand: 'run ci-publish-package -- --rev-version --auth-type pat --token $(PublishToken)'
