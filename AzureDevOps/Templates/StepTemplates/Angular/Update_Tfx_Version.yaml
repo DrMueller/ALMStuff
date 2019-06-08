@@ -1,0 +1,13 @@
+steps:
+- powershell: |
+   $filePath= Join-Path -Path $(Build.Repository.LocalPath) -ChildPath "vss-extension.json"
+   
+   Write-Host "Repository LocalPath: $(Build.Repository.LocalPath)"
+   Write-Host "Environment-File: $filePath"
+   Write-Host "Build Number: $(GitVersion.FullSemVer)"
+   
+   $environmentContent = Get-Content $filePath
+   $replaced = $environmentContent -replace '__BuildVersion__', '$(GitVersion.FullSemVer)'
+   
+   Set-Content -Path $filePath -value $replaced
+  displayName: 'Update TFX Version'

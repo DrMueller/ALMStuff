@@ -12,4 +12,5 @@ jobs:
   - template: ../../StepTemplates/Angular/Update_Version.yaml
     parameters:
       WorkingDir: dist
+  - template: ../../StepTemplates/Angular/Update_Tfx_Version.yaml
   - template: ../../StepTemplates/Angular/Publish_Tfx_Package.yaml
