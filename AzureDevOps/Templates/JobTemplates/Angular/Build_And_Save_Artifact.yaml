@@ -2,7 +2,7 @@ jobs:
 - job: 'BuildAndSaveArtifact'
   displayName: 'Build and save Artifact'
   pool:
-    name: 'Default'
+    name: 'Hosted Ubuntu 1604'
   steps:
   - template: ../../StepTemplates/Angular/Configure_Git.yaml
   - template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
