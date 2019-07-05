@@ -1,3 +1,6 @@
+parameters:
+  ZipArtifacts: ''
+
 jobs:
 - job: 'BuildAndSaveArtifact'
   displayName: 'Build and save Artifact'
@@ -12,4 +15,22 @@ jobs:
   - template: ../../StepTemplates/Angular/Update_Version.yaml
     parameters:
       WorkingDir: dist
-  - template: ../../StepTemplates/Angular/Zip_And_Save_Artifact.yaml
+
+ - ${{ if eq(parameters.ZipArtifacts, true) }}:
+  - task: ArchiveFiles@2
+    displayName: Archive as ZIP
+    inputs:
+      rootFolderOrFile: '$(Build.Repository.LocalPath)/dist'
+
+      includeRootFolder: false
+
+      archiveFile: '$(Build.ArtifactStagingDirectory)/Zip/Artifacts.zip'
+   - task: PublishBuildArtifacts@1
+     displayName: 'Save zipped Artifact'
+      inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Zip'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Save unzipped Artifact'
+      inputs:
+      PathtoPublish: '$(Build.Repository.LocalPath)/dist'
