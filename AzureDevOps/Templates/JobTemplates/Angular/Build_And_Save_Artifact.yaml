@@ -16,21 +16,17 @@ jobs:
     parameters:
       WorkingDir: dist
 
- - ${{ if eq(parameters.ZipArtifacts, true) }}:
-  - task: ArchiveFiles@2
-    displayName: Archive as ZIP
-    inputs:
-      rootFolderOrFile: '$(Build.Repository.LocalPath)/dist'
-
-      includeRootFolder: false
-
-      archiveFile: '$(Build.ArtifactStagingDirectory)/Zip/Artifacts.zip'
-   - task: PublishBuildArtifacts@1
-     displayName: 'Save zipped Artifact'
+  - ${{ if eq(parameters.ZipArtifacts, true) }}:
+    - task: ArchiveFiles@2
+      displayName: Archive as ZIP
       inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Zip'
+        rootFolderOrFile: '$(Build.Repository.LocalPath)/dist'
 
+        includeRootFolder: false
+
+        archiveFile: '$(Build.ArtifactStagingDirectory)/Zip/Artifacts.zip'
+      
   - task: PublishBuildArtifacts@1
-    displayName: 'Save unzipped Artifact'
-      inputs:
-      PathtoPublish: '$(Build.Repository.LocalPath)/dist'
+    displayName: 'Save zipped Artifact'
+    inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Zip'
