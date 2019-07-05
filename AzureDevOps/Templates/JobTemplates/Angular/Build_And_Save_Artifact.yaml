@@ -1,5 +1,5 @@
 parameters:
-  ZipArtifacts
+  ZipArtifacts: ''
 
 jobs:
 - job: 'BuildAndSaveArtifact'
@@ -35,4 +35,4 @@ jobs:
     - task: PublishBuildArtifacts@1
       displayName: 'Save unzipped Artifact'
       inputs:
-        PathtoPublish: '$(Build.Repository.LocalPath)/dist'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Zip'
