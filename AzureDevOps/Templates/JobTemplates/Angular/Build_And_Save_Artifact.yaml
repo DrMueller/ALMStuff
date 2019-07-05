@@ -35,4 +35,4 @@ jobs:
     - task: PublishBuildArtifacts@1
       displayName: 'Save unzipped Artifact'
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Zip'
+        PathtoPublish: '$(Build.Repository.LocalPath)/dist'
