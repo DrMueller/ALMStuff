@@ -26,7 +26,13 @@ jobs:
 
         archiveFile: '$(Build.ArtifactStagingDirectory)/Zip/Artifacts.zip'
       
-  - task: PublishBuildArtifacts@1
-    displayName: 'Save zipped Artifact'
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Zip'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Save zipped Artifact'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Zip'
+
+  - ${{ if eq(parameters.ZipArtifacts, false) }}:
+    - task: PublishBuildArtifacts@1
+      displayName: 'Save unzipped Artifact'
+      inputs:
+        PathtoPublish: '$(Build.Repository.LocalPath)/dist'
