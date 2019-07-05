@@ -1,5 +1,5 @@
 parameters:
-  ZipArtifacts: ''
+  ZipArtifacts
 
 jobs:
 - job: 'BuildAndSaveArtifact'
