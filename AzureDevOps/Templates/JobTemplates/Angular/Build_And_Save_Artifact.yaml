@@ -12,11 +12,10 @@ jobs:
     parameters:
       ExecuteIntegrationTests: false
   - template: ../../StepTemplates/Angular/Build_Production.yaml
-  - template: ../../StepTemplates/Angular/Update_Environment_Version.yaml
   - template: ../../StepTemplates/Angular/Update_NPM_Package_Version.yaml
     parameters:
       WorkingDir: dist
-
+  - template: ../../StepTemplates/Angular/Update_Environment_Version.yaml
   - ${{ if eq(parameters.ZipArtifacts, true) }}:
     - task: ArchiveFiles@2
       displayName: Archive as ZIP
