@@ -7,4 +7,4 @@ steps:
       
    Set-Content -Path $filePath -value $replaced
    
-  displayName: 'Update Prod-Environment BuildVersion'
+  displayName: 'Update Prod-Environment Version'
