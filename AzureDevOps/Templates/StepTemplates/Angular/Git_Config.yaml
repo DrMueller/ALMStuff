@@ -3,15 +3,6 @@ parameters:
 
 steps:
 - task: Npm@1
-  displayName: 'Git Clean'
-  inputs:
-    command: custom
-
-    verbose: false
-
-    customCommand: 'run ci-git-clean'
-
-- task: Npm@1
   displayName: 'Git Config'
   inputs:
     command: custom
