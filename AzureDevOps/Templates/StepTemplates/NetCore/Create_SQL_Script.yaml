@@ -1,5 +1,4 @@
 steps:
-steps:
 - task: DotNetCoreCLI@2
   displayName: 'Create Migration SQL Script'
   inputs:
