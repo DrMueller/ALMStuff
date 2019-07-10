@@ -1,6 +1,7 @@
 parameters:
   BuildConfiguration: ''
   FolderToPublish: ''
+  PublishSubPath: ''
 
 steps:
 - task: DotNetCoreCLI@2
@@ -12,7 +13,7 @@ steps:
 
     projects: '**/${{ parameters.FolderToPublish }}/*.csproj'
 
-    arguments: '--configuration ${{ parameters.BuildConfiguration }} --output $(Build.ArtifactStagingDirectory)  /p:DeleteExistingFiles=True'
+    arguments: '--configuration ${{ parameters.BuildConfiguration }} --output $(Build.ArtifactStagingDirectory)/{{ parameters.PublishSubPath }}  /p:DeleteExistingFiles=True'
 
     zipAfterPublish: false
 
