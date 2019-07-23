@@ -18,8 +18,3 @@ jobs:
   parameters:
     FolderToPack: $(FolderToPack)
     BuildConfiguration: $(BuildConfiguration)
-
-- template: AzureDevOps/Templates/JobTemplates/NetCore/Create_AzureDevOps_Release.yaml@ALMStuff
-  parameters:
-    DependsOnJobName: 'BuildAndPublishToNuGet'
-    ParentWorkitemId: $(ParentWorkItemId)
