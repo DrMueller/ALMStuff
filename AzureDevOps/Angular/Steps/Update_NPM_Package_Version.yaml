@@ -1,0 +1,14 @@
+parameters:
+  WorkingDir: ''
+
+steps:
+- task: Npm@1
+  displayName: 'Update Version'
+  inputs:
+    command: custom
+
+    workingDir: '${{parameters.WorkingDir}}'
+
+    verbose: false
+
+    customCommand: 'version $(Build.BuildNumber)'

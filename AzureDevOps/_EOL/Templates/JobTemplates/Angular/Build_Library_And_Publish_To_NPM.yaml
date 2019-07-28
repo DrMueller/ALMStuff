@@ -1,0 +1,15 @@
+parameters:
+  LibraryName: ''
+  ExecuteIntegrationTests: false 
+
+jobs:
+- job: 'BuildAndPublishToNPM'
+  displayName: 'Build and publish to NPM'
+  pool:
+    name: 'Default'
+  steps:
+  - template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
+    parameters:
+      ExecuteIntegrationTests: ${{ parameters.ExecuteIntegrationTests }}
+  - template: ../../StepTemplates/Angular/Build_Production.yaml
+  - template: ../../StepTemplates/Angular/Publish_To_NPM.yaml

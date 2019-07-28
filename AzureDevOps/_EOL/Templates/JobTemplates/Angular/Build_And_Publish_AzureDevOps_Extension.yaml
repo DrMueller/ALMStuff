@@ -1,0 +1,16 @@
+jobs:
+- job: 'BuildAndPublishAzureDevOpsExtension'
+  displayName: 'Build and publish Azure DevOps Extension'
+  pool:
+    name: 'Default'
+  steps:
+  - template: ../../StepTemplates/Angular/Configure_Git.yaml
+  - template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
+    parameters:
+      ExecuteIntegrationTests: false
+  - template: ../../StepTemplates/Angular/Build_Production.yaml
+  - template: ../../StepTemplates/Angular/Update_Version.yaml
+    parameters:
+      WorkingDir: dist
+  - template: ../../StepTemplates/Angular/Update_Tfx_Version.yaml
+  - template: ../../StepTemplates/Angular/Publish_Tfx_Package.yaml

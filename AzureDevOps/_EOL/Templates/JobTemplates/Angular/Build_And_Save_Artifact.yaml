@@ -1,0 +1,39 @@
+parameters:
+  ZipArtifacts: false
+
+jobs:
+- job: 'BuildAndSaveArtifact'
+  displayName: 'Build and save Artifact'
+  pool:
+    name: 'Hosted Ubuntu 1604'
+  steps:
+  - template: ../../StepTemplates/Angular/Git_Config.yaml
+  - template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
+    parameters:
+      ExecuteIntegrationTests: false
+  - template: ../../StepTemplates/Angular/Update_Environment_Version.yaml
+  - template: ../../StepTemplates/Angular/Build_Production.yaml
+  - template: ../../StepTemplates/Angular/Git_Commit.yaml
+  - template: ../../StepTemplates/Angular/Update_NPM_Package_Version.yaml
+    parameters:
+      WorkingDir: dist
+  - ${{ if eq(parameters.ZipArtifacts, true) }}:
+    - task: ArchiveFiles@2
+      displayName: Archive as ZIP
+      inputs:
+        rootFolderOrFile: '$(Build.Repository.LocalPath)/dist'
+
+        includeRootFolder: false
+
+        archiveFile: '$(Build.ArtifactStagingDirectory)/Zip/Artifacts.zip'
+      
+    - task: PublishBuildArtifacts@1
+      displayName: 'Save zipped Artifact'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Zip'
+
+  - ${{ if eq(parameters.ZipArtifacts, false) }}:
+    - task: PublishBuildArtifacts@1
+      displayName: 'Save unzipped Artifact'
+      inputs:
+        PathtoPublish: '$(Build.Repository.LocalPath)/dist'

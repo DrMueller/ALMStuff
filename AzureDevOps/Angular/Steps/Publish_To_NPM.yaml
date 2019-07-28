@@ -1,0 +1,12 @@
+parameters:
+  LibraryName: ''
+
+steps:
+- task: Npm@1
+  displayName: 'Publish to NPM'
+  inputs:
+    command: custom
+    workingDir: 'dist/drmueller/${{parameters.LibraryName}}'
+    verbose: false
+    customCommand: 'publish --access public'
+    customEndpoint: 'NPM-DrMueller'

@@ -1,0 +1,30 @@
+parameters:
+  BuildConfiguration: ''
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: restore
+
+    projects: '**/*.csproj'
+
+    vstsFeed: '3c2d9c9a-d8f7-42f4-b7a3-dddf4064110a'
+
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build with Warnings as Errors'
+  inputs:
+    projects: '**/*.csproj'
+
+    arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.BuildConfiguration }}'
+
+
+- task: DotNetCoreCLI@2
+  displayName: Run Tests
+  inputs:
+    command: test
+
+    projects: '**/*Tests/*.csproj'
+
+    arguments: '--configuration ${{ parameters.BuildConfiguration }}'

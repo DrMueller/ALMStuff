@@ -1,0 +1,12 @@
+parameters:
+  LibraryName: ''
+
+steps:
+- task: Npm@1
+  displayName: 'Git Commit'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run ci-git-commit'
