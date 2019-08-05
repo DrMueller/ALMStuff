@@ -7,14 +7,14 @@ jobs:
   pool:
     name: 'Hosted Ubuntu 1604'
   steps:
-  - template: ../../StepTemplates/Angular/Git_Config.yaml
-  - template: ../../StepTemplates/Angular/Initialize_And_Test.yaml
+  - template: ../Steps/Angular/Git_Config.yaml
+  - template: ../Steps/Angular/Initialize_And_Test.yaml
     parameters:
       ExecuteIntegrationTests: false
-  - template: ../../StepTemplates/Angular/Update_Environment_Version.yaml
-  - template: ../../StepTemplates/Angular/Build_Production.yaml
-  - template: ../../StepTemplates/Angular/Git_Commit.yaml
-  - template: ../../StepTemplates/Angular/Update_NPM_Package_Version.yaml
+  - template: ../Steps/Angular/Update_Environment_Version.yaml
+  - template: ../Steps/Angular/Build_Production.yaml
+  - template: ../Steps/Angular/Git_Commit.yaml
+  - template: ../Steps/Angular/Update_NPM_Package_Version.yaml
     parameters:
       WorkingDir: dist
   - ${{ if eq(parameters.ZipArtifacts, true) }}:
