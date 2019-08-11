@@ -1,3 +1,6 @@
+parameters:
+    RelativeFolderPath: ''
+
 steps:
 - task: DotNetCoreCLI@2
   displayName: 'Create Migration SQL Script'
@@ -5,4 +8,4 @@ steps:
     command: custom
     custom: ef
     arguments: ' migrations script --output $(Build.ArtifactStagingDirectory)\SQL\Migration.sql --idempotent'
-    workingDirectory: '$(System.DefaultWorkingDirectory)\Sources\'
+    workingDirectory: '$(System.DefaultWorkingDirectory)\${{parameters.RelativeFolderPath}}\'
