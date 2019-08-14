@@ -2,7 +2,7 @@ name: 1.0$(rev:.r) # build numbering format
 
 variables:
   BuildConfiguration: 'Release'
-  FolderToPack: 'Application'
+  FolderToPublish: 'Application'
 
 resources:
   repositories:
@@ -16,7 +16,7 @@ jobs:
 - job: 'BuildAndPublishToNuGet'
   displayName: 'Build and publish to NuGet'
   pool:
-    name: 'Hosted VS2017'
+    name: 'Default'
   steps:
   - template: ../Steps/Initialize_And_Test.yaml
     parameters:
