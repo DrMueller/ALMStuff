@@ -3,7 +3,6 @@ name: 1.0$(rev:.r) # build numbering format
 variables:
   BuildConfiguration: 'Release'
   FolderToPack: 'Application'
-  ParentWorkitemId: TODO
 
 resources:
   repositories:
