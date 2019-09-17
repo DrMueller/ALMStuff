@@ -37,7 +37,7 @@ steps:
       additionalImageTags: '$(Build.BuildNumber)'
       includeLatestTag: true
 
-  - ${{ if eq($(parameters.ApplyDockerstack), true) }}:
+  - ${{ if eq(parameters.ApplyDockerstack, true) }}:
     - task: powershell@2
       displayName: 'Update DockerStack'
       inputs:
