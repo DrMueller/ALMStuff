@@ -26,6 +26,7 @@ steps:
       imageName: '$(ImageName)'
       additionalImageTags: '$(Build.BuildNumber)'
       includeLatestTag: true
+      buildContext: '$(Build.ArtifactStagingDirectory)'
 
   - task: Docker@0
     displayName: 'Push Docker Image'
