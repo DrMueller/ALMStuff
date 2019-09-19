@@ -21,7 +21,7 @@ steps:
   - task: Docker@0
     displayName: 'Build Docker Image'
     inputs:
-      buildContext: '$(Build.ArtifactStagingDirectory)'
+      buildContext: 'Tra'
       containerregistrytype: 'Container Registry'
       dockerRegistryConnection: DockerHub
       imageName: '$(ImageName)'
