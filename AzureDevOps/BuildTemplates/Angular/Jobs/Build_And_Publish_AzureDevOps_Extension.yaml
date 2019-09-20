@@ -4,13 +4,13 @@ jobs:
   pool:
     name: 'Default'
   steps:
-  - template: ../Steps/Angular/Configure_Git.yaml
-  - template: ../Steps/Angular/Initialize_And_Test.yaml
+  - template: ../Steps/Git_Config.yaml
+  - template: ../Steps/Initialize_And_Test.yaml
     parameters:
       ExecuteIntegrationTests: false
-  - template: ../Steps/Angular/Build_Production.yaml
-  - template: ../Steps/Update_Version.yaml
+  - template: ../Steps/Build_Production.yaml
+  - template: ../Steps/Update_NPM_Package_Version.yaml
     parameters:
       WorkingDir: dist
-  - template: ../Steps/Angular/Update_Tfx_Version.yaml
-  - template: ../Steps/Angular/Publish_Tfx_Package.yaml
+  - template: ../Steps/Update_Tfx_Version.yaml
+  - template: ../Steps/Publish_Tfx_Package.yaml
