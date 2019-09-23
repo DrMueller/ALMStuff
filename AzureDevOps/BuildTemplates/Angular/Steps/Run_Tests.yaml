@@ -1,0 +1,35 @@
+parameters:
+  ExecuteIntegrationTests: ''
+
+steps:
+- task: Npm@1
+  displayName: 'Run Unit Tests'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run ci-unit-test'
+
+- ${{ if eq(parameters.ExecuteIntegrationTests, true) }}:
+  - task: Npm@1
+    displayName: 'Run Integration Tests'
+    inputs:
+      command: custom
+
+      verbose: false
+
+      customCommand: 'run ci-integration-test'
+
+    condition: succeeded()
+
+  
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testResultsFiles: '**/testresults/*-tests.xml'
+
+    failTaskOnFailedTests: true
+
+  condition: succeededOrFailed()
+  
