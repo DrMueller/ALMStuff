@@ -16,7 +16,8 @@ jobs:
 - job: 'BuildAndPublishAsArtifact'
   displayName: 'Build and save zipped Artifact'
   pool:
-    name: Default
+    name: Azure Pipelines
+    vmImage: windows-2019
   steps:
   - template: AzureDevOps/BuildTemplates/NetCore/Steps/Initialize_And_Test.yaml@ALMStuff
     parameters:
