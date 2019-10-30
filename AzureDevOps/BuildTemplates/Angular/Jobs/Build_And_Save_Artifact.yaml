@@ -8,7 +8,8 @@ jobs:
     name: 'Hosted Ubuntu 1604'
   steps:
   - template: ../Steps/Git_Config.yaml
-  - template: ../Steps/Initialize_And_Test.yaml
+  - template: ../Steps/Initialize.yaml
+  - template: ../Steps/Run_Tests.yaml
     parameters:
       ExecuteIntegrationTests: false
   - template: ../Steps/Update_Environment_Version.yaml
