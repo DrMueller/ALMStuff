@@ -1,5 +1,6 @@
 parameters:
   BuildConfiguration: ''
+  SolutionName: ''
 
 steps:
 - task: DotNetCoreCLI@2
@@ -16,9 +17,12 @@ steps:
   displayName: 'Build with Warnings as Errors'
   inputs:
     projects: '**/*.csproj'
-
     arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.BuildConfiguration }}'
 
+- task: alanwales.resharper-code-analysis.custom-build-task.ResharperCli@2
+  displayName: 'Run ReSharper analysis'
+  inputs:
+    solutionOrProjectPath: ${{ parameters.SolutionName }}
 
 - task: DotNetCoreCLI@2
   displayName: Run Tests
