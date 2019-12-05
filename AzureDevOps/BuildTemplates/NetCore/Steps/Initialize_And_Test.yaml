@@ -1,30 +1,29 @@
 parameters:
   BuildConfiguration: ''
+  SolutionName: ''
 
 steps:
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
     command: restore
-
     projects: '**/*.csproj'
-
     vstsFeed: '3c2d9c9a-d8f7-42f4-b7a3-dddf4064110a'
-
 
 - task: DotNetCoreCLI@2
   displayName: 'Build with Warnings as Errors'
   inputs:
     projects: '**/*.csproj'
-
     arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.BuildConfiguration }}'
 
+- task: alanwales.resharper-code-analysis.custom-build-task.ResharperCli@2
+  displayName: 'Run ReSharper analysis'
+  inputs:
+    solutionOrProjectPath: ${{ parameters.SolutionName }}
 
 - task: DotNetCoreCLI@2
   displayName: Run Tests
   inputs:
     command: test
-
     projects: '**/*Tests/*.csproj'
-
     arguments: '--configuration ${{ parameters.BuildConfiguration }}'
