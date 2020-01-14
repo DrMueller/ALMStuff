@@ -16,12 +16,11 @@ steps:
     projects: '**/*.csproj'
     arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.BuildConfiguration }}'
 
-- task: YodLabs.VariableTasks.SetVariable.SetVariable@0
-  displayName: 'Set Variable MSBuildSDKsPath'
-  inputs:
-    variableName: MSBuildSDKsPath
-    value: '$(Agent.ToolsDirectory)/dncs/$(DotNet.Sdk.Version)/x64/sdk/$(DotNet.Sdk.Version)/Sdks'
-
+- powershell: |
+   $path = Join-Path -Path $(Build.ArtifactStagingDirectory) -ChildPath "\JetBrains.ReSharper.CommandLineTools.2019.3.1\tools\"
+   New-Item -Path "$path" -Name "Reports" -ItemType "directory"
+  displayName: 'Create ReSharper Reports Path'
+   
 - task: alanwales.resharper-code-analysis.custom-build-task.ResharperCli@2
   displayName: 'Run ReSharper analysis'
   inputs:
