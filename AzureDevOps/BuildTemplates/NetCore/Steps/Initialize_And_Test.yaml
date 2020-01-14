@@ -20,6 +20,7 @@ steps:
   displayName: 'Run ReSharper analysis'
   inputs:
     solutionOrProjectPath: ${{ parameters.SolutionName }}
+    ResultsOutputFilePath: '$(Common.TestResultsDirectory)\$(Resharper.Output.File)'
 
 - task: DotNetCoreCLI@2
   displayName: Run Tests
