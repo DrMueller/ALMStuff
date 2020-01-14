@@ -4,6 +4,7 @@ variables:
   BuildConfiguration: 'Release'
   FolderToPublish: 'WpfUI'
   PublishPath: '$(Build.ArtifactStagingDirectory)'
+  SolutionName: 'MLH.TODO.sln'
 
 resources:
   repositories:
@@ -23,6 +24,7 @@ jobs:
   - template: AzureDevOps/BuildTemplates/NetCore/Steps/Initialize_And_Test.yaml@ALMStuff
     parameters:
       buildConfiguration: $(BuildConfiguration)
+      SolutionName: $(SolutionName)
   - template: AzureDevOps/BuildTemplates/NetCore/Steps/Publish.yaml@ALMStuff
     parameters:
       BuildConfiguration: $(BuildConfiguration)
