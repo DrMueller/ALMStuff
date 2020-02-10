@@ -1,0 +1,43 @@
+parameters:
+  BuildConfiguration: ''
+  SolutionName: ''
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet 4.4.1'
+  inputs:
+    versionSpec: 4.4.1
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    vstsFeed: '3c2d9c9a-d8f7-42f4-b7a3-dddf4064110a'
+
+- task: SamirBoulema.Vsix-Tools.Vsix-Tools-Update-Version.VsixToolsUpdateVersion@2
+  displayName: 'Set Vsix Version'
+  inputs:
+    FileName: Sources/Application/source.extension.vsixmanifest
+    VersionNumber: '$(Build.BuildNumber)'
+
+- task: VSBuild@1
+  displayName: 'Build with Warnings as Errors'
+  inputs:
+    msbuildArgs: '/p:TreatWarningsAsErrors="true /p:OutputPath=$(Build.ArtifactStagingDirectory)/Dist --configuration ${{ parameters.BuildConfiguration }}'
+
+- powershell: |
+   $path = Join-Path -Path $(Build.ArtifactStagingDirectory) -ChildPath "\JetBrains.ReSharper.CommandLineTools.2019.3.1\tools\"
+   New-Item -Path "$path" -Name "Reports" -ItemType "directory"
+  displayName: 'Create ReSharper Reports Path'
+   
+- task: alanwales.resharper-code-analysis.custom-build-task.ResharperCli@2
+  displayName: 'Run ReSharper analysis'
+  inputs:
+    solutionOrProjectPath: ${{ parameters.SolutionName }}
+
+- task: SamirBoulema.Vsix-Tools.Vsix-Tools-Upload-Vsix.VsixToolsUploadVsix@2
+  displayName: 'Upload Vsix'
+  inputs:
+    UploadTo: Marketplace
+    PublishManifest: 'Sources/Application/extension-manifest.json'
+    PersonalAccessToken: $(PublishToken)
+    WorkingDirectory: '$(Build.ArtifactStagingDirectory)/Dist'
