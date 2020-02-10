@@ -1,20 +1,18 @@
 parameters:
-  BuildConfiguration: ''
-  FolderToPublish: ''
-  PublishPath: '$(Build.ArtifactStagingDirectory)'
+  ManifestJsonPath: ''
+  WorkingDirectory: ''
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: Publish
+- task: SamirBoulema.Vsix-Tools.Vsix-Tools-Update-Version.VsixToolsUpdateVersion@2
+  displayName: 'Set Vsix Version'
   inputs:
-    command: publish
+    FileName: Sources/Application/source.extension.vsixmanifest
+    VersionNumber: '$(Build.BuildNumber)'
 
-    publishWebProjects: false
-
-    projects: '**/${{ parameters.FolderToPublish }}/*.csproj'
-
-    arguments: '--configuration ${{ parameters.BuildConfiguration }} --output ${{ parameters.PublishPath }} /p:DeleteExistingFiles=True'
-
-    zipAfterPublish: false
-
-    modifyOutputPath: false
+- task: SamirBoulema.Vsix-Tools.Vsix-Tools-Upload-Vsix.VsixToolsUploadVsix@2
+  displayName: 'Upload Vsix'
+  inputs:
+    UploadTo: Marketplace
+    PublishManifest: '${{ parameters.ManifestJsonPath }}'
+    PersonalAccessToken: $(PublishToken)
+    WorkingDirectory: '${{ parameters.WorkingDirectory }}'
