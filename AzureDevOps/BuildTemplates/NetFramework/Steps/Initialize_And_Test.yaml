@@ -17,7 +17,7 @@ steps:
 - task: VSBuild@1
   displayName: 'Build with Warnings as Errors'
   inputs:
-    msbuildArgs: '/p:TreatWarningsAsErrors="true /p:OutputPath={{ parameters.BuildOutputPath }} --configuration ${{ parameters.BuildConfiguration }}'
+    msbuildArgs: '/p:TreatWarningsAsErrors="true /p:OutputPath=${{ parameters.BuildOutputPath }} --configuration ${{ parameters.BuildConfiguration }}'
 
 - powershell: |
    $path = Join-Path -Path $(Build.ArtifactStagingDirectory) -ChildPath "\JetBrains.ReSharper.CommandLineTools.2019.3.1\tools\"
