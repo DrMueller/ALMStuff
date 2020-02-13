@@ -19,12 +19,12 @@ steps:
   inputs:
     msbuildArgs: '/p:TreatWarningsAsErrors="true" /p:OutputPath=${{ parameters.BuildOutputPath }} /p:Configuration=${{ parameters.BuildConfiguration }}'
 
-- powershell: |
-   $path = Join-Path -Path $(Build.ArtifactStagingDirectory) -ChildPath "\JetBrains.ReSharper.CommandLineTools.2019.3.1\tools\"
-   New-Item -Path "$path" -Name "Reports" -ItemType "directory"
-  displayName: 'Create ReSharper Reports Path'
+# - powershell: |
+#    $path = Join-Path -Path $(Build.ArtifactStagingDirectory) -ChildPath "\JetBrains.ReSharper.CommandLineTools.2019.3.1\tools\"
+#    New-Item -Path "$path" -Name "Reports" -ItemType "directory"
+#   displayName: 'Create ReSharper Reports Path'
    
-- task: alanwales.resharper-code-analysis.custom-build-task.ResharperCli@2
-  displayName: 'Run ReSharper analysis'
-  inputs:
-    solutionOrProjectPath: ${{ parameters.SolutionName }}
+# - task: alanwales.resharper-code-analysis.custom-build-task.ResharperCli@2
+#   displayName: 'Run ReSharper analysis'
+#   inputs:
+#     solutionOrProjectPath: ${{ parameters.SolutionName }}
