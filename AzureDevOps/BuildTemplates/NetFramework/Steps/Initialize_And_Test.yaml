@@ -1,23 +1,23 @@
-parameters:
-  BuildConfiguration: ''
-  SolutionName: ''
-  BuildOutputPath : ''
+# parameters:
+#   BuildConfiguration: ''
+#   SolutionName: ''
+#   BuildOutputPath : ''
 
-steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Use NuGet 4.4.1'
-  inputs:
-    versionSpec: 4.4.1
+# steps:
+# - task: NuGetToolInstaller@1
+#   displayName: 'Use NuGet 4.4.1'
+#   inputs:
+#     versionSpec: 4.4.1
 
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
-  inputs:
-    vstsFeed: '3c2d9c9a-d8f7-42f4-b7a3-dddf4064110a'
+# - task: NuGetCommand@2
+#   displayName: 'NuGet restore'
+#   inputs:
+#     vstsFeed: '3c2d9c9a-d8f7-42f4-b7a3-dddf4064110a'
 
-- task: VSBuild@1
-  displayName: 'Build with Warnings as Errors'
-  inputs:
-    msbuildArgs: '/p:TreatWarningsAsErrors="true" /p:OutputPath=${{ parameters.BuildOutputPath }} /p:Configuration=${{ parameters.BuildConfiguration }}'
+# - task: VSBuild@1
+#   displayName: 'Build with Warnings as Errors'
+#   inputs:
+#     msbuildArgs: '/p:TreatWarningsAsErrors="true" /p:OutputPath=${{ parameters.BuildOutputPath }} /p:Configuration=${{ parameters.BuildConfiguration }}'
 
 # - powershell: |
 #    $path = Join-Path -Path $(Build.ArtifactStagingDirectory) -ChildPath "\JetBrains.ReSharper.CommandLineTools.2019.3.1\tools\"
