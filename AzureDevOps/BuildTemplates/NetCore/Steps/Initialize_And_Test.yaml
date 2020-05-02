@@ -26,6 +26,7 @@ steps:
   displayName: 'Run ReSharper analysis'
   inputs:
     solutionOrProjectPath: ${{ parameters.SolutionName }}
+  enabled: false
 
 - task: DotNetCoreCLI@2
   displayName: Run Tests
