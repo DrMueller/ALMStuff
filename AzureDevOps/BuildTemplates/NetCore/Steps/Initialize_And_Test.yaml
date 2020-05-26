@@ -1,6 +1,6 @@
 parameters:
   BuildConfiguration: ''
-  SolutionPath: ''
+  SolutionName: ''
 
 steps:
 - task: DotNetCoreCLI@2
@@ -19,7 +19,7 @@ steps:
 - task: alanwales.resharper-code-analysis.custom-build-task.ResharperCli@2
   displayName: 'Run ReSharper analysis'
   inputs:
-    solutionOrProjectPath: ${{ parameters.SolutionPath }}
+    solutionOrProjectPath: ${{ parameters.SolutionName }}
   enabled: true
 
 - task: DotNetCoreCLI@2
