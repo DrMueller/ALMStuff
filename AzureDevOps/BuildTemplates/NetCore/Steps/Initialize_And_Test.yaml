@@ -22,7 +22,7 @@ steps:
   displayName: 'Run ReSharper analysis'
   inputs:
     solutionOrProjectPath: ${{ parameters.ApplicationSubPath }}/${{ parameters.SolutionName }}
-    additionalArguments: --no-buildin-settings --profile=$(Build.SourcesDirectory)\ALMStuff\ServerDevelopment\Frameworks\ReSharper\SolutionProxy_NuGet.DotSettings
+    additionalArguments: ' --no-buildin-settings --profile="$(Build.SourcesDirectory)\ALMStuff\ServerDevelopment\Frameworks\ReSharper\SolutionProxy_NuGet.DotSettings"'
   enabled: true
 
 - task: DotNetCoreCLI@2
