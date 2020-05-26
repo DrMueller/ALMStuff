@@ -8,8 +8,9 @@ steps:
   displayName: Restore
   inputs:
     command: restore
-    projects: '{{ parameters.ApplicationSubPath }}/**/*.csproj'
+    projects: '{{parameters.ApplicationSubPath}}/**/*.csproj'
     vstsFeed: '3c2d9c9a-d8f7-42f4-b7a3-dddf4064110a'
+    verbosityRestore: Diagnostic
 
 - task: DotNetCoreCLI@2
   displayName: 'Build with Warnings as Errors'
