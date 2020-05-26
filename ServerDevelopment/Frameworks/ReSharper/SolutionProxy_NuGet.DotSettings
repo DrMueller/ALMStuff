@@ -3,7 +3,6 @@
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=2CE105D5F6EF7A4EA5947F8E6BDAE973/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=ECDFE6FE3CF2F8459FA0AA06E617CAA3/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=ECDFE6FE3CF2F8459FA0AA06E617CAA3/AbsolutePath/@EntryValue">C:\MyGit\Personal\ALMStuff\ServerDevelopment\Frameworks\ReSharper\RootSettings_NuGet.DotSettings</s:String>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=ECDFE6FE3CF2F8459FA0AA06E617CAA3/RelativePath/@EntryValue">..\..\..\ALMStuff\ServerDevelopment\Frameworks\ReSharper\RootSettings_NuGet.DotSettings</s:String>
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File2CE105D5F6EF7A4EA5947F8E6BDAE973/@KeyIndexDefined">True</s:Boolean>
 	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File2CE105D5F6EF7A4EA5947F8E6BDAE973/RelativePriority/@EntryValue">1</s:Double>
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileECDFE6FE3CF2F8459FA0AA06E617CAA3/@KeyIndexDefined">True</s:Boolean>
