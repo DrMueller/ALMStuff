@@ -4,6 +4,8 @@ parameters:
   SolutionName: ''
 
 steps:
+- checkout: self
+- checkout: ALMStuff
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
