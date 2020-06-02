@@ -1,3 +1,11 @@
+resources:
+  repositories:
+  - repository: ALMStuff
+    type: github
+    name: DrMueller/ALMStuff
+    ref: refs/heads/master
+    endpoint: GitHub-DrMueller
+
 parameters:
   BuildConfiguration: ''
   ApplicationSubPath: ''
