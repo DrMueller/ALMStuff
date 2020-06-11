@@ -2,6 +2,7 @@ parameters:
   BuildConfiguration: ''
   ApplicationSubPath: ''
   SolutionName: ''
+  ReSharperSettingsFileName: ''
 
 steps:
 - task: DotNetCoreCLI@2
@@ -19,7 +20,7 @@ steps:
     arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.BuildConfiguration }}'
     
 - powershell: |
-   $sourceReSharperFilePath = "ALMStuff/ServerDevelopment/Frameworks/ReSharper/CI/CISettings_NuGet.DotSettings"
+   $sourceReSharperFilePath = "ALMStuff/ServerDevelopment/Frameworks/ReSharper/CI/${{parameters.ReSharperSettingsFileName}}"
    $origFile = "${{parameters.ApplicationSubPath}}/${{parameters.SolutionName}}.DotSettings"
    Copy-Item -Path "$sourceReSharperFilePath" -Destination "$origFile" -Force -Verbose
    
