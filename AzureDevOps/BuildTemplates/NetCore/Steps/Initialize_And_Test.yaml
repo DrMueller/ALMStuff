@@ -4,8 +4,6 @@ parameters:
   SolutionName: ''
 
 steps:
-- checkout: self
-- checkout: ALMStuff
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
@@ -24,7 +22,6 @@ steps:
   displayName: 'Run ReSharper analysis'
   inputs:
     solutionOrProjectPath: ${{ parameters.ApplicationSubPath }}/${{ parameters.SolutionName }}
-    additionalArguments: --profile:$(Build.SourcesDirectory)\ALMStuff\ServerDevelopment\Frameworks\ReSharper\CISettings_NuGet.DotSettings
   enabled: true
 
 - task: DotNetCoreCLI@2
