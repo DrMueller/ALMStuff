@@ -11,18 +11,34 @@ steps:
     projects: '${{ parameters.ApplicationSubPath }}/**/*.csproj'
     vstsFeed: '3c2d9c9a-d8f7-42f4-b7a3-dddf4064110a'
     verbosityRestore: Diagnostic
+  enabled: false
 
 - task: DotNetCoreCLI@2
   displayName: 'Build with Warnings as Errors'
   inputs:
     projects: '${{ parameters.ApplicationSubPath }}/**/*.csproj'
     arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.BuildConfiguration }}'
+  enabled: false
+    
+- powershell: |
+   $sourceReSharperFilePath = Join-Path -Path $(Build.SourcesDirectory) -ChildPath "/ALMStuff/ServerDevelopment/Frameworks/ReSharper/CI/CISettings_NuGet.DotSettings"
    
+   Write-Host "$sourceReSharperFilePath"
+   
+   $origFile = "${{ parameters.ApplicationSubPath }}/${{ parameters.SolutionName }}"
+   Write-Host "$origFile"
+   
+   Remove-Item -Path "$origFile" -Recurse -Force -Verbose
+   Rename-Item -Path "$sourceReSharperFilePath" -NewName "$origFile" -Force -Verbose
+   
+   
+  displayName: 'Copy relative ReSharper settings'
+
 - task: alanwales.resharper-code-analysis.custom-build-task.ResharperCli@2
   displayName: 'Run ReSharper analysis'
   inputs:
     solutionOrProjectPath: ${{ parameters.ApplicationSubPath }}/${{ parameters.SolutionName }}
-  enabled: true
+  enabled: false
 
 - task: DotNetCoreCLI@2
   displayName: Run Tests
@@ -30,3 +46,4 @@ steps:
     command: test
     projects: '${{ parameters.ApplicationSubPath }}/**/*Tests/*.csproj'
     arguments: '--configuration ${{ parameters.BuildConfiguration }}'
+  enabled: false
