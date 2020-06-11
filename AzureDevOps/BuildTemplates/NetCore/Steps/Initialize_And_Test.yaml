@@ -20,7 +20,7 @@ steps:
     
 - powershell: |
    $sourceReSharperFilePath = "ALMStuff/ServerDevelopment/Frameworks/ReSharper/CI/CISettings_NuGet.DotSettings"
-   $origFile = "${{ parameters.ApplicationSubPath }}/${{ parameters.SolutionName }}"
+   $origFile = "${{parameters.ApplicationSubPath}}/${{parameters.SolutionName}}.DotSettings"
    Copy-Item -Path "$sourceReSharperFilePath" -Destination "$origFile" -Force -Verbose
    
    
