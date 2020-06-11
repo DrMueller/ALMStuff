@@ -20,10 +20,12 @@ steps:
     arguments: '/p:TreatWarningsAsErrors="true" --configuration ${{ parameters.BuildConfiguration }}'
     
 - powershell: |
-   $sourceReSharperFilePath = "ALMStuff/ServerDevelopment/Frameworks/ReSharper/CI/${{parameters.ReSharperSettingsFileName}}"
-   $origFile = "${{parameters.ApplicationSubPath}}/${{parameters.SolutionName}}.DotSettings"
+   $sourceReSharperFilePath = "$(Build.SourcesDirectory)/ALMStuff/ServerDevelopment/Frameworks/ReSharper/CI/${{parameters.ReSharperSettingsFileName}}"
+   $origFile = "$(Build.SourcesDirectory)/${{parameters.ApplicationSubPath}}/${{parameters.SolutionName}}.DotSettings"
    Copy-Item -Path "$sourceReSharperFilePath" -Destination "$origFile" -Force -Verbose
    
+   $content = Get-Content $origFile
+   Write-Host $content
    
   displayName: 'Copy relative ReSharper settings'
 
