@@ -21,14 +21,8 @@ steps:
   enabled: false
     
 - powershell: |
-   $sourceReSharperFilePath = Join-Path -Path $(Build.SourcesDirectory) -ChildPath "/ALMStuff/ServerDevelopment/Frameworks/ReSharper/CI/CISettings_NuGet.DotSettings"
-   
-   Write-Host "$sourceReSharperFilePath"
-   
+   $sourceReSharperFilePath = "ALMStuff/ServerDevelopment/Frameworks/ReSharper/CI/CISettings_NuGet.DotSettings"
    $origFile = "${{ parameters.ApplicationSubPath }}/${{ parameters.SolutionName }}"
-   
-   Write-Host "$origFile"
-   
    Copy-Item -Path "$sourceReSharperFilePath" -Destination "$origFile" -Force -Verbose
    
    
